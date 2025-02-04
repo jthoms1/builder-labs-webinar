@@ -1,8 +1,30 @@
 "use client";
 import { builder, Builder, withChildren } from "@builder.io/react";
-import { TopNavigation, Input } from "@cloudscape-design/components";
+import {
+  TopNavigation,
+  Input,
+  Button,
+  Icon,
+} from "@cloudscape-design/components";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+
+Builder.registerComponent(Button, {
+  name: "Button",
+  inputs: [
+    {
+      name: "variant",
+      type: "string",
+      meta: {
+        ts: "ButtonVariant",
+      },
+    },
+  ],
+});
+
+Builder.registerComponent(Icon, {
+  name: "Icon",
+});
 
 Builder.registerComponent(withChildren(TopNavigation), {
   name: "TopNavigation",
@@ -114,7 +136,6 @@ Builder.registerComponent(Input, {
     {
       name: "value",
       type: "string",
-      required: true,
     },
     {
       name: "warning",

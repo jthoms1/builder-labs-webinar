@@ -21,6 +21,15 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/mappings/design-tokens.mapper.tsx.old",
+    "src/mappings/Icon.mapper.tsx.old",
+    "src/mappings/design-tokens.mapper.tsx.old",
+    "src/mappings/Button.mapper.tsx.old"
+  ],
   "exclude": ["node_modules"]
 }

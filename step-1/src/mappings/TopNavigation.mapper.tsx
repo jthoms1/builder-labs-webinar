@@ -9,6 +9,15 @@ figmaMapping({
   componentKey: "56a35954cce8f53e9b417c0ef7d35fc9899363bc",
   mapper(figma) {
     let utilities: TopNavigationProps.Utility[] = [];
+    if (figma.$findOneByName("External link")) {
+      utilities.push({
+        type: "button",
+        text: "Link",
+        href: "https://example.com/",
+        external: true,
+        externalIconAriaLabel: " (opens in a new tab)",
+      });
+    }
     if (figma.Notifications) {
       utilities.push({
         type: "button",
@@ -26,7 +35,7 @@ figmaMapping({
         ariaLabel: "Settings",
       });
     }
-    if (figma.Dropdown === "Profile") {
+    if (figma.$findOneByName("Customer profile")) {
       utilities.push({
         type: "menu-dropdown",
         text: "Customer name",
@@ -36,21 +45,20 @@ figmaMapping({
       });
     }
 
-    const identityTitle = figma.$findOneByName("ServiceName")?.$textContent;
-    const logo = figma
-      .$findOneByName("ServiceLogo")
-      ?.$findOne((node) => node.type === "IMAGE");
+    const identityTitle = figma.$findOneByName("Service name")?.$textContent;
+    const logoImage = figma.$findOneByName("Logo");
+    const logoText = figma.$findOneByName("Logo")?.$textContent;
 
     return (
       <TopNavigation
         identity={{
           href: "#",
           title: identityTitle || undefined,
-          logo: !logo
+          logo: !logoImage
             ? undefined
             : {
-                src: logo.$imageUrl,
-                alt: "Service name logo",
+                src: logoImage.$imageUrl,
+                alt: logoText,
               },
         }}
         search={
